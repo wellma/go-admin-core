@@ -46,6 +46,11 @@ type GinJWTMiddleware struct {
 	// Check error (e) to determine the appropriate error message.
 	Authenticator func(c *gin.Context) (interface{}, error)
 
+	// Callback function that should perform the authentication of the wechat user based on login info.
+	// Must return user data as user identifier, it will be stored in Claim Array. Required.
+	// Check error (e) to determine the appropriate error message.
+	WechatAuthenticator func(c *gin.Context) (interface{}, error)
+
 	// Callback function that should perform the authorization of the authenticated user. Called
 	// only after an authentication success. Must return true on success, false on failure.
 	// Optional, default to success.
@@ -213,19 +218,19 @@ var (
 	RKey = "r"
 
 	// RoleIdKey 角色id  Old
-	RoleIdKey   = "roleid"
+	RoleIdKey = "roleid"
 
 	// RoleKey 角色名称  Old
-	RoleKey     = "rolekey"
+	RoleKey = "rolekey"
 
 	// RoleNameKey 角色名称  Old
 	RoleNameKey = "rolename"
 
 	// RoleIdKey 部门id
-	DeptId   = "deptId"
+	DeptId = "deptId"
 
 	// RoleKey 部门名称
-	DeptName     = "deptName"
+	DeptName = "deptName"
 )
 
 // New for check error with GinJWTMiddleware
